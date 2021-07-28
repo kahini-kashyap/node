@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+    <h3>Enter your name:</h3>
+    <input type = "text" id = "name">
+    <button onclick = "submit()">Submit</button>
+<script>
+    function submit(){
+        let name = document.getElementById("name").value;
+        let url = "/data/" + name;
+        fetch(url).then(function(res){
+            return res.json();
+        }).then(function(res2){
+        window.location.href =  res2.link;
+        });
+    }
+</script>
+</body>
+</html>
+
+<!-- age and email -->

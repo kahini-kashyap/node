@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know your IP</title>
+</head>
+<body>
+    <input type = "text" id = "display" style = "height:20px;width:300px;" disabled> <br> <br>
+    <button id = "track" onclick = "tracker()">Track!</button>
+
+<script>
+    function tracker(){
+        fetch("/track").then(function(res){
+            return res.json();
+        }).then(function(res2){
+            document.getElementById("display").value = res2.ip
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<html>
+<body>
+<h1>Form</h1>
+<h3>Email ID:</h3>
+<input type = "text" id = "email">
+<h3>Password</h3>
+<input type = "password" id = "password">
+<button id = "submit" onclick = "submit()">Submit</button>
+<script>
+function submit(){
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    fetch("http://localhost:3000/data", {method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify({email, password})});
+}
+localStorage.setItem("email","key");
+</script>
+</body>
+</html>

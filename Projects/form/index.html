@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>First Name</h2>
+    <input type="text" id="firstname">
+    <h2>Last Name</h2>
+    <input type="text" id="lastname">
+    <h2>Email ID</h2>
+    <input type="email" id="mail">
+    <button id="submit" onclick="submit()">Submit!</button>
+    <script>
+        function submit() {
+            let fname = document.getElementById("firstname").value;
+            let lname = document.getElementById("lastname").value;
+            let mail = document.getElementById("mail").value;
+            var url = "/form/" + fname + "/" + lname + "/" + mail;
+            fetch(url).then(res => { return res.json() }).then(res2 => { document.write(res2.message) });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>First Name</h3>
+    <input type = "text" id = "content">
+
+    <h3>Last Name</h3>
+    <input type = "text" id = "content1">
+
+    <br>
+
+    <button onclick = "data()">Click Me!</button>
+<script>
+    function data(){
+        let content = document.getElementById("content").value;
+        let content1 = document.getElementById("content1").value;
+        let url = "http://localhost:3000/form/" + content + "/" + content1;
+        fetch(url);
+    }
+</script>
+</body>
+</html>

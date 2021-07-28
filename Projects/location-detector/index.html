@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Detector</title>
+</head>
+<style>
+  
+</style>
+
+<body>
+
+    <h2>Form</h2>
+    <h3>Name</h3>
+    <input type="text" id="data1">
+    <h3>Age</h3>
+    <input type="number" id="data2">
+    <h3>Birthday</h3>
+    <input type="text" id="data3">
+    <h3>Email ID</h3>
+    <input type="email" id="data4">
+    <button type="submit" onclick="submit()">Submit</button>
+    <script>
+
+        function main() {
+            navigator.geolocation.getCurrentPosition(function (location) {
+                let lat = location.coords.latitude;
+                let lon = location.coords.longitude;
+                let url = "/location/" + lat.toString() + "/" + lon.toString();
+                fetch(url).then(res => {
+                    return res.json()
+
+                }).then(function (res) {
+
+                })
+            })
+        }
+
+        setInterval(main, 5000);
+
+        function submit() {
+            let name = document.getElementById("data1").value;
+            let age = document.getElementById("data2").value;
+            let birthday = document.getElementById("data3").value;
+            let email = document.getElementById("data4").value;
+            let url = "/data/" + name + "/" + age + "/" + birthday + "/" + email;
+            fetch(url)
+        }
+    </script>
+</body>
+
+</html>

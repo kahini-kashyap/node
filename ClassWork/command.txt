@@ -1,0 +1,14 @@
+ls = shows all files in the current folder
+cd = to move to another folder
+cd .. = to move to previous folder
+touch <name> = to make a new file
+clear = clear all
+exit = exit terminal
+
+npm init -y = for not to click enter again and again
+
+Git Commands
+git init = to initialise the git repository
+    git add . = putting it for tracking
+    git commit -m "message" = to name the version 
+git push origin main = to update the version 
