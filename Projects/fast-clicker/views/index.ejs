@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Clicker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(22, 22, 58);
+            margin: 0px;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        #header {
+            width: 100vw;
+            color: white;
+            background-color: rgb(22, 22, 58);
+            text-align: center;
+        }
+
+        #main {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100vw;
+        }
+
+        .buttons {
+            border-radius: 50%;
+            border: none;
+            color: rgb(22, 22, 58);
+            background-color: white;
+            padding: 50px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden;
+            font-size: 20px;
+        }
+
+        #start {
+            padding: 20px;
+            color: white;
+            background-color: green;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            width: 100px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        #start:hover{
+            color: white;
+            background-color: transparent;
+            border: solid 3px green;
+        }
+
+        #score1 {
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            display: inline;
+        }
+
+        #time {
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #highs {
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <h1>Number Game</h1>
+        <h3>Click the biggest number you see from the 5 buttons to get a point!</h3>
+    </div>
+
+    <div id="highs">
+        <span>
+            <h2>Highest Score: </h2>
+            <h2 id="high_score">0</h2>
+        </span>
+    </div><br>
+
+
+    <div id="score1">
+        <span>
+            <h2>Score: </h2>
+            <h2 id="score">0</h2>
+        </span>
+    </div><br>
+
+    <div id="time">
+        <span>
+            <h2>Time: </h2>
+            <h2 id="timer">0</h2>
+        </span>
+    </div><br>
+
+    <button id="start" onclick="start()">Start</button><br><br>
+
+    <div id="main">
+        <button class="buttons" id="btn1" onclick="order(1)"></button>
+        <button class="buttons" id="btn2" onclick="order(2)"></button>
+        <button class="buttons" id="btn3" onclick="order(3)"></button>
+        <button class="buttons" id="btn4" onclick="order(4)"></button>
+        <button class="buttons" id="btn5" onclick="order(5)"></button>
+    </div>
+    <script>
+        let values = []
+        document.getElementById("main").style.display = "none";
+
+        function start() {
+            document.getElementById("main").style.display = "flex";
+            for (let i = 0; i < 5; i++) {
+                let temp_number = randomNum();
+                values.push(temp_number)
+            }
+            document.getElementById("btn1").innerHTML = values[0]
+            document.getElementById("btn2").innerHTML = values[1]
+            document.getElementById("btn3").innerHTML = values[2]
+            document.getElementById("btn4").innerHTML = values[3]
+            document.getElementById("btn5").innerHTML = values[4]
+            timer();
+        }
+
+        function randomNum() {
+            return Math.floor(Math.random() * 21) + 1;
+        }
+
+        function order(id) {
+            let num = parseInt(document.getElementById("btn" + id).innerHTML);
+            let temp = maximum(values);
+            if (temp == num) {
+                document.getElementById("score").innerHTML = parseInt(document.getElementById("score").innerHTML) + 1;
+                values = [];
+                start();
+            }
+            else {
+                alert("Wrong");
+                update();
+                window.location.href = "/"; //will have to change the url
+            }
+        }
+
+        function maximum(arr) {
+            let max = arr[0]
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] > max) {
+                    max = arr[i]
+                }
+            }
+            return max;
+        }
+
+        function timer() {
+            let time = parseInt(document.getElementById("timer").innerHTML);
+            setInterval(function () {
+                time++;
+                document.getElementById("timer").innerHTML = time;
+            }, 1000);
+        }
+
+        function highScore() {
+            fetch("/gethighscore").then(function (res) {
+                return res.json()
+            }).then(function (res2) {
+                document.getElementById("high_score").innerHTML = res2.score;
+            })
+        }
+
+        function update() {
+            let user_score = document.getElementById("score").innerHTML;
+            fetch("/updatehighscore", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ score: user_score }) });
+        }
+
+        highScore();
+    </script>
+</body>
+
+</html>

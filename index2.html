@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type = "number" placeholder = "number1" id = "number1">
+    <input type = "number" placeholder = "number2" id = "number2">
+    <button onclick = "sum()">Submit</button>
+<script>
+    function sum(){
+        var number1 = parseInt(document.getElementById("number1").value);
+        var number2 = parseInt(document.getElementById("number2").value);
+        var answer = numbers(number1,number2);
+        alert(answer);
+    }
+    function numbers(a,b){
+        return a + b;
+    }
+</script>
+</body>
+</html>

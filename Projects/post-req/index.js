@@ -25,5 +25,5 @@ app.listen(3000, function(err){
         console.log(err);
     }
     else{
-        console.log("Server is running")
+        console.log("Server is running");
     }

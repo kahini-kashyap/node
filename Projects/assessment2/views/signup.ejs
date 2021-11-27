@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+        margin: 0px;
+    }
+
+    body {
+        background-image: linear-gradient(to right, #1500D7, #3333FF, #41C0FF);
+        overflow: hidden;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    #main {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #white {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    #right {
+        height: 80vh;
+        width: 65vw;
+        background-color: rgb(219, 219, 219);
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    }
+
+    #left {
+        width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        color: white;
+    }
+
+    #form1 {
+        display: flex;
+        height: 80vh;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #columns {
+        display: flex;
+        align-items: space-around;
+        flex-direction: column;
+
+    }
+
+    input {
+        width: 300px;
+        font-family: 'Nunito', sans-serif;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 20px;
+        outline: none;
+        margin-right: 20px;
+    }
+
+    .register {
+        font-size: 35px;
+    }
+
+    #register {
+        padding: 10px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: green;
+        color: white;
+    }
+
+    #register:hover {
+        background-color: transparent;
+        border: solid 3px green;
+        color: green;
+    }
+
+    a {
+        color: white;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <div id="left">
+            <img src="./saturn.png">
+            <!--Ask sir-->
+            <h1>Welcome to {name}!</h1><br>
+            <h2>Sign up to {blah blah}!</h2><br>
+            <h4>Already registered? Log in <a href="http://localhost:3000/signin">here</a></h4>
+        </div>
+
+        <div id="white">
+            <div id="right">
+                <div id="form1">
+                    <h1 class="register">Registration Form</h1><br>
+                    <div id="columns">
+                        <div id="left2">
+                            <input type="text" placeholder="First Name" id="fname">
+                            <input type="text" placeholder="Last Name" id="lname">
+                        </div><br>
+                        <div id="right2">
+                            <input type="email" placeholder="Email" id="email">
+                            <input type="password" placeholder="Password" id="password">
+                        </div><br>
+                    </div>
+                    <button type="submit" id="register" onclick="register()">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function register(){
+            let fname = document.getElementById("fname").value;
+            let lname = document.getElementById("lname").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            fetch("/signup1", {method: "POST", headers:{'Content-Type' : 'application/json'}, body: JSON.stringify({fname,lname,email,password})}).then(function(res){
+            console.log(fname,lname,email,password);
+            return res.json();
+        }).then(function(res2){
+            console.log(res2);
+        })
+        }
+    </script>
+</body>
+
+</html>

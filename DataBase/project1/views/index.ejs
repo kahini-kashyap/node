@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ #text{
+     display: flex;
+     justify-content: center;
+     display: none;
+
+ }
+</style>
+<body>
+    <div id = "text">
+        <h1>An email has been sent to you.</h1>   
+       </div>
+    <h3>First Name</h3>
+    <input type="text" id="fname">
+    <h3>Last Name</h3>
+    <input type="text" id="lname">
+    <h3>Email</h3>
+    <input id = "email" id = "email">
+    <input type="submit" id="submit" onclick = "submit()">
+    <script>
+        function submit(){
+            let fname = document.getElementById("fname").value;
+            let lname = document.getElementById("lname").value;
+            let email = document.getElementById("email").value;
+        fetch("/data", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({fname, lname, email}) }).then(function (res) {
+            return res.json();
+        }).then(function (res2) {
+            document.getElementById("text").style.display="block";
+            document.getElementById("text").innerHTML=res2.message;
+        })  }
+    </script>
+</body>
+
+</html>

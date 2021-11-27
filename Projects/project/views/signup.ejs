@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <h3>Name</h3>
+    <input type = "text" id = "name">
+    <h3>Age</h3>
+    <input type = "number" id = "age">
+    <h3>Email</h3>
+    <input type = "email" id = "email">
+    <h3>Password</h3>
+    <input type = "password" id = "password">
+    <button onclick = "signup()">Sign up</button>
+<script>
+    function signup(){
+        let name = document.getElementById("name").value;
+        let age = document.getElementById("age").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        fetch("/signup1", {method:"POST", headers:{"Content-Type": "application/json"},body: JSON.stringify({name, age, email, password})}).then(function(res){
+            console.log(name,age,email,password);
+            return res.json();
+        }).then(function(res2){
+            alert(res2.message);
+        })
+    }
+</script>
+</body>
+</html>
