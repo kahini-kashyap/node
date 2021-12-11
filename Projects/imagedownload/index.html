@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="download()">Download</button>
+
+    <script>
+        function download() {
+            fetch("https://user-images.githubusercontent.com/67754275/144999248-b2f8705a-7f45-411f-aa2b-2e317a8043a6.jpeg").then(function (res) {
+                return res.blob();
+            }).then(function (res2) {
+                let url = URL.createObjectURL(res2);
+                console.log(url);
+                const link = document.createElement('a')
+                link.href = url;
+                link.download = 'image file name here'
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
+            })
+        }
+
+
+    </script>
+
+</body>
+
+</html>

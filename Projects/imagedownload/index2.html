@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Speed Checker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+<style>
+    *{
+        margin: 0px;
+    }
+    body{
+        font-family: 'Nunito Sans', sans-serif;
+        background-color: rgb(34, 36, 59);
+    }
+
+    .main{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        height: 60vh;
+        width: 100vw;
+        color: white;
+}
+
+#speed{
+    font-size: 60px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.center{
+    font-size: 40px;
+}
+
+button{
+    font-family: 'Nunito Sans', sans-serif;
+    padding: 8px;
+    font-size:20px;
+    bordeR: none;
+    border-radius: 4px;
+    background-color: rgb(30, 163, 30);
+    color: white;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: transparent;
+    border: solid 2px rgb(30, 163, 30);
+    color: rgb(30, 163, 30);
+}
+
+h3{
+    font-size: 60px;
+}
+
+.zero{
+    font-size: 60px;
+}
+</style>
+</head>
+<body>
+    <div class = "main">
+    <h1 class = "center">Check you Internet Speed!</h1>
+    <h3 id = "zero">0</h3>
+    <div id = "speed"></div>
+    <button id = "check" onclick = "check()">Check</button>
+    
+</div>
+    <script>
+        document.getElementById("speed").style.display = "none";
+
+        function check(){
+            let starttime = Date.now();
+            document.getElementById("check").style.display = "none";
+            document.getElementById("zero").style.display = "none";
+            document.getElementById("speed").style.display = "block";
+            fetch("https://user-images.githubusercontent.com/52379890/144995886-ec80943a-9a37-4058-8631-f9bc1044eba4.jpg").then(function(res){
+                let endtime = Date.now();
+                let totaltime = (endtime - starttime)/1000;
+                document.getElementById("speed").innerHTML = 7.74/5 +  " MBps";
+            })
+
+}
+        
+    </script>
+</body>
+</html>

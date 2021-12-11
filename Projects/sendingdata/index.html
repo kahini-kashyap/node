@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Name</h1>
+    <input type = "text" id = "name">
+    <h1>Email</h1>
+    <input type = "text" id = "email">
+    <button onclick = "submit()">Submit</button>
+    <script>
+        function submit(){
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let url = "/data/" + name + "/" + email;
+            fetch(url).then(function(res){
+                return res.json();
+            }).then(function(res2){
+                alert("data sent");
+            })
+        }
+
+    </script>
+</body>
+</html>
