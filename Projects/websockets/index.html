@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gappe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(18, 56, 63);
+            font-family: 'Be Vietnam Pro', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        #tagline {
+            color: white;
+            margin-top: -20px;
+        }
+
+        #box {
+            height: 500px;
+            width: 800px;
+            border-radius: 5px;
+            background-color: white;
+            overflow: scroll;
+        }
+
+        #text {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            border: none;
+            outline: none;
+            padding: 4px;
+            font-size: 20px;
+            border-radius: 3px;
+            width: 700px;
+            height: 25px;
+        }
+
+        #send {
+            border-radius: 3px;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            border: none;
+            height: 30px;
+            width: 80px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(39, 110, 49);
+            color: white;
+        }
+
+        #send:hover {
+            background-color: transparent;
+            color: white;
+            cursor: pointer;
+            border: solid 2px white;
+        }
+
+        #aligning {
+            display: flex;
+            width: 800px;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #message {
+            width: 500px;
+            border-radius: 9px;
+            color: white;
+            margin-left: 20px;
+            margin-top: 20px;
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Gappe</h1>
+    <h3 id="tagline">A platform to chat with people all around the world!</h3>
+
+    <div id="box">
+    </div><br>
+
+    <div id="aligning">
+        <input type="text" id="text">
+        <button onclick="send()" id="send">Send</button>
+    </div>
+
+    <script>
+        var ws = new WebSocket("ws://localhost:3000");
+
+        function send() {
+            var message = document.getElementById("text").value;
+            var user = localStorage.getItem("Name");
+            ws.send(user + ": " + message);
+            document.getElementById("box").innerHTML += `<div id = "message" style = "background-color: dodgerblue;">
+            <h3>${user + ": " + message}</h3>
+        </div>`
+            document.getElementById("text").value = "";
+        }
+
+        ws.onmessage = function (message) {
+            document.getElementById("box").innerHTML += `<div id = "message" style = "background-color: rgb(116, 119, 119);">
+            <h3>${message.data}</h3>
+        </div>`
+        }
+
+        var name = prompt("Enter you name: ");
+        localStorage.setItem("Name", name);
+    </script>
+</body>
+
+</html>
+
+<!-- 
+    1. change font
+    2. left-right texts
+    3. margin issue
+    4. cookies
+ -->

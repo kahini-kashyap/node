@@ -8,85 +8,93 @@
     <link rel="icon" href="./board.jpeg">
     <title>Whiteboard</title>
     <style>
-        *{
-            margin:0px;
+        * {
+            margin: 0px;
         }
-        #main{
+
+        #main {
             display: flex;
             align-items: center;
             justify-content: flex-start;
         }
-        #colors{
-            margin-left:30px;
+
+        #colors {
+            margin-left: 30px;
         }
 
-        #reset{
-            margin:20px;
+        #reset {
+            margin: 20px;
         }
-        .reset{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 120px;
-    background-color: red;
-    color:white;
-    border-radius: 25px;
-    font-family: 'Nunito', sans-serif;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
 
-.reset:hover{
-    background-color: transparent;
-    color:  red;
-    border: 2px solid  red;
-}
+        .reset {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            width: 120px;
+            background-color: red;
+            color: white;
+            border-radius: 25px;
+            font-family: 'Nunito', sans-serif;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .reset:hover {
+            background-color: transparent;
+            color: red;
+            border: 2px solid red;
+        }
     </style>
 </head>
 
 <body>
     <canvas style=" cursor: pointer;border:2px solid black; overflow:hidden;" id="board"></canvas>
-    <div id = "main">
+    <div id="main">
         <div>
             <h2>Brush Width</h2>
             <input type="range" min="1" max="20" value="4" id="thick" oninput="thickness()">
         </div>
-        <div id = "colors">
+        <div id="colors">
             <h2>Brush Colors</h2>
-        <div id="black"
-            style="height: 30px; width: 30px; background-color: black; display:inline-block; cursor: pointer"
-            onclick="black()"></div>
-        <div id="red" style="height: 30px; width: 30px; background-color: red; display:inline-block; cursor: pointer"
-            onclick="red()"></div>
-        <div id="blue" style="height: 30px; width: 30px; background-color:blue; display:inline-block; cursor: pointer"
-            onclick="blue()"></div>
-        <div id="green" style="height: 30px; width: 30px; background-color:green; display:inline-block; cursor: pointer"
-            onclick="green()"></div>
-        <div id="orange"
-            style="height: 30px; width: 30px; background-color: orange; display:inline-block; cursor: pointer"
-            onclick="orange()"></div><br>
-        <div id="yellow"
-            style="height: 30px; width: 30px; background-color: yellow; display:inline-block; cursor: pointer"
-            onclick="yellow()"></div>
-        <div id="pink" style="height: 30px; width: 30px; background-color: pink; display:inline-block; cursor: pointer"
-            onclick="pink()"></div>
-        <div id="purple"
-            style="height: 30px; width: 30px; background-color: purple; display:inline-block; cursor: pointer"
-            onclick="purple()"></div>
-        <div id="brown"
-            style="height: 30px; width: 30px; background-color: rgb(92, 10, 10); display:inline-block; cursor: pointer"
-            onclick="brown()"></div>
-        <div id="grey" style="height: 30px; width: 30px; background-color: grey; display:inline-block; cursor: pointer"
-            onclick="grey()"></div>
-        <div id="eraser" style="display:inline-block; cursor: pointer" onclick="eraser()"><img src="eraser.png"
-                style="height: 30px; width: 35px;"></div>
-            </div>
+            <div id="black"
+                style="height: 30px; width: 30px; background-color: black; display:inline-block; cursor: pointer"
+                onclick="black()"></div>
+            <div id="red"
+                style="height: 30px; width: 30px; background-color: red; display:inline-block; cursor: pointer"
+                onclick="red()"></div>
+            <div id="blue"
+                style="height: 30px; width: 30px; background-color:blue; display:inline-block; cursor: pointer"
+                onclick="blue()"></div>
+            <div id="green"
+                style="height: 30px; width: 30px; background-color:green; display:inline-block; cursor: pointer"
+                onclick="green()"></div>
+            <div id="orange"
+                style="height: 30px; width: 30px; background-color: orange; display:inline-block; cursor: pointer"
+                onclick="orange()"></div><br>
+            <div id="yellow"
+                style="height: 30px; width: 30px; background-color: yellow; display:inline-block; cursor: pointer"
+                onclick="yellow()"></div>
+            <div id="pink"
+                style="height: 30px; width: 30px; background-color: pink; display:inline-block; cursor: pointer"
+                onclick="pink()"></div>
+            <div id="purple"
+                style="height: 30px; width: 30px; background-color: purple; display:inline-block; cursor: pointer"
+                onclick="purple()"></div>
+            <div id="brown"
+                style="height: 30px; width: 30px; background-color: rgb(92, 10, 10); display:inline-block; cursor: pointer"
+                onclick="brown()"></div>
+            <div id="grey"
+                style="height: 30px; width: 30px; background-color: grey; display:inline-block; cursor: pointer"
+                onclick="grey()"></div>
+            <div id="eraser" style="display:inline-block; cursor: pointer" onclick="eraser()"><img src="eraser.png"
+                    style="height: 30px; width: 35px;"></div>
+        </div>
 
-    <div id = "reset">
-        <button onclick = "reset()" class = "reset">Reset</button>
-    </div>
+        <div id="reset">
+            <button onclick="reset()" class="reset">Reset</button>
+        </div>
     </div>
     <script>
         let canvas = document.getElementById("board")
@@ -167,7 +175,7 @@
             context.strokeStyle = "white";
         }
 
-        function reset(){
+        function reset() {
             window.location.reload();
         }
     </script>
