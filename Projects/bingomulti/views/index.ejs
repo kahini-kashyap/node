@@ -106,7 +106,12 @@
             <div id="number25" class="box"></div>
         </div>
     </div>
+    <div id = "player_number" style = "display: none;">
+    <%=player_number%>
+    </div>
     <script>
+        let player_number = parseInt(document.getElementById("player_number").innerHTML);
+        let pointer = player_number;
         var movenum = 1;
         var playernum = 1;
         var status = 0;
@@ -116,8 +121,19 @@
             if (notification.type == 1) {
                 status = notification.status;
                 alert(notification.message);
-            }if (notification.type == 2) {
-                
+            } if (notification.type == 2) {
+
+                let button_clicked = parseInt(notification.message);
+                let index = 0;
+                for (let i = 0; i < 25; i++) {
+                    if (button_clicked == numbers[i]) {
+                        index = i;
+                        break;
+                    }
+                }
+                index++;
+                pointer++;
+                document.getElementById("number" + index).click();
             }
 
         }
@@ -126,9 +142,15 @@
         var blank = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         function start() {
+
+            if(player_number>1){
+                alert("room is occupied, please refresh");
+            }
+
             if (status == 0) {
                 return;
             }
+
             document.getElementById("heading").innerHTML = "";
             document.getElementById("startgame").style.display = "none";
 
@@ -147,11 +169,16 @@
             for (let i = 0; i < 25; i++) {
                 document.getElementById("number" + (i + 1).toString()).addEventListener("click", function (event) {
                     let index = event.target.id.substr(6);
+                    if(pointer%2==0){
+                alert("its not your turn");
+                return;
+            }
+            pointer++;
                     document.getElementById(event.target.id).style.backgroundColor = "rgb(27, 122, 35)";
                     blank[parseInt(event.target.id.substr(6)) - 1] = 1;
 
                     let count = check();
-                    let notification1 = {type:2, message:document.getElementById(event.target.id).innerHTML, count };
+                    let notification1 = { type: 2, message: document.getElementById(event.target.id).innerHTML, count };
                     socket.send(JSON.stringify(notification1));
                     if (count == 1) {
                         document.getElementById("heading").innerHTML = "B";
@@ -173,10 +200,10 @@
             }
         }
 
-
-
         var totalline = 0;
         function check() {
+            
+            console.log("kahini");
             var lines = 0;
             var winposs = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18, 19], [20, 21, 22, 23, 24], [0, 5, 10, 15, 20], [1, 6, 11, 16, 21], [2, 7, 12, 17, 22], [3, 8, 13, 18, 23], [4, 9, 14, 19, 24], [0, 6, 12, 18, 24], [4, 8, 12, 16, 20]];
             for (let i = 0; i < winposs.length; i++) {
@@ -187,6 +214,7 @@
             }
             return lines;
         }
+
 
 
     </script>
