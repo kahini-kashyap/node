@@ -15,7 +15,7 @@ wss.on("connection", function (client) {
         client.send(JSON.stringify(notification));
     }
     else if (wss.clients.size == 2) {
-        client.send(JSON.stringify({ type: 1, message: "second player joined, please start the game", status: 1}))
+        client.send(JSON.stringify({ type: 1, message: "second player joined, please start the game", status: 1}));
         wss.clients.forEach(function (player) {
             let notification = { type: 1, message: "second player joined, please start the game", status: 1};
             if (player != client) {

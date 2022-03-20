@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Code Compiler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+</head>
+<style>
+    body {
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(38, 46, 65);
+        color: white;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    #main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #main1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tag {
+        text-align: center;
+    }
+
+    .run {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Nunito', sans-serif;
+        background-color: rgb(8, 141, 8);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px;
+        font-size: 24px;
+    }
+
+    .run:hover{
+        cursor: pointer;
+        border: solid 2px rgb(8, 141, 8);
+        background-color: transparent;
+        color: rgb(8, 141, 8);
+    }
+
+    .textar{
+        font-family: 'Nunito', sans-serif;
+        padding: 10px;
+        font-size: 13px;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <h1 class="tag">JavaScript Code Compiler</h1>
+        <div id="main1">
+            <textarea rows="30" cols="80" style="resize: none;outline: none;" id="code" class = "textar"></textarea>
+            <textarea rows="30" cols="80" style="resize: none;outline: none;" id="output" class = "textar"></textarea>
+        </div><br>
+        <button class="run" onclick="code()" style="text-align: center;">Run Code</button>
+    </div>
+    <script>
+        function code() {
+            var code = document.getElementById("code").value;
+            fetch("/code", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code }) }).then(function (res) {
+                return res.json();
+            }).then(function (res2) {
+                document.getElementById("output").value = res2.output;
+            })
+        }
+    </script>
+</body>
+
+</html>

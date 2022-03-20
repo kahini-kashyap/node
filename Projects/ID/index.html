@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .tag {
+        text-align: center;
+    }
+
+    .run {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<body>
+
+    <h2 class="tag">Python Code Compiler</h2>
+    <button class="run" onclick="code()">Run Code</button>
+    <div id="main">
+        <textarea rows="30" cols="100" style="resize: none;outline: none;" id="code"></textarea>
+        <textarea rows="30" cols="100" style="resize: none;outline: none;" id = "output"></textarea>
+    </div>
+
+<script>
+    function code(){
+        var code = document.getElementById("code").value;
+        fetch("/code", {method:"POST", headers:{"Content-Type": "application/json"}, body: JSON.stringify({code})}).then(function(res){
+            return res.json();
+        }).then(function(res2){
+            document.getElementById("output").value=res2.output;
+        })
+    }
+</script>
+</body>
+
+</html>

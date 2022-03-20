@@ -1,0 +1,7 @@
+form - radio buttons, selection tag, form tag, file uploading (backend)
+qrcode -- done
+image processing
+video convertor
+youtube downloader
+instagram downloader
+service worker
